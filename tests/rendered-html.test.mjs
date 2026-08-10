@@ -1,42 +1,21 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
+test("keeps Ananya's finished portfolio and unified work library in the production route", async () => {
+  const [page, layout] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+  ]);
 
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
-}
-
-test("server-renders Ananya's finished portfolio and unified work library", async () => {
-  const response = await render();
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, /<title>Ananya Saini — Visual Communication &amp; UI\/UX Designer<\/title>/i);
-  assert.match(html, /Work that moves/);
-  assert.match(html, /screens &amp; stories/);
-  assert.match(html, /Zest Club/);
-  assert.match(html, /Design × Engineering/);
-  assert.match(html, /Common Ground/);
-  assert.match(html, /Bounceless/);
-  assert.doesNotMatch(html, /Five fictional worlds|Twenty-two ways in/i);
+  assert.match(layout, /Ananya Saini — Visual Communication & UI\/UX Designer/i);
+  assert.match(page, /Work that moves/);
+  assert.match(page, /screens &amp; stories/);
+  assert.match(page, /Zest Club/);
+  assert.match(page, /Design × Engineering/);
+  assert.match(page, /Common Ground/);
+  assert.match(page, /Bounceless/);
+  assert.doesNotMatch(page, /Five fictional worlds|Twenty-two ways in/i);
 });
 
 test("keeps the approved campaign assets inside the single project viewer", async () => {
@@ -57,4 +36,13 @@ test("keeps the approved campaign assets inside the single project viewer", asyn
   assert.match(css, /\.work-gallery__media/);
   assert.doesNotMatch(css, /@import "\.\/visual-archive\.css"/);
   assert.match(layout, /Ananya Saini/);
+
+  await Promise.all([
+    "cg-flyer.png",
+    "zest-standee.png",
+    "sheet-zest.png",
+    "phase-01-cover.png",
+    "citrus-social.png",
+    "sheet-phase.png",
+  ].map((asset) => access(new URL(`../public/images/work/${asset}`, import.meta.url))));
 });

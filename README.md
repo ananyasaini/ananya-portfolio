@@ -13,10 +13,10 @@ A responsive portfolio for Ananya Saini, a visual communication and UI/UX design
 ## Built with
 
 - React 19
-- Next.js-compatible Vinext runtime
+- Next.js 16 App Router
 - TypeScript
 - CSS animations and responsive layout
-- Vite and Cloudflare-compatible output
+- Native Vercel-compatible production build
 
 ## Local development
 
