@@ -964,11 +964,20 @@ export default function Home() {
             <strong>CLARITY<br />&gt; CLUTTER</strong>
             <i>always.</i>
           </div>
-          <div className="about-scrap about-scrap--song">
+          <div className="about-scrap about-scrap--song" data-cursor="PLAY">
             <span>♫ CURRENTLY ON REPEAT</span>
-            <strong>Your song goes here</strong>
-            <small>Waiting for Ananya’s pick · 03:24</small>
-            <i><b /><b /><b /><b /><b /><b /></i>
+            <strong>All the Stars</strong>
+            <small>Kendrick Lamar &amp; SZA · 03:52</small>
+            <a
+              className="about-scrap__song-link"
+              href="https://open.spotify.com/track/3GCdLUSnKSMJhs4Tj6CV3s"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Play All the Stars by Kendrick Lamar and SZA on Spotify"
+            >
+              <span>Play on Spotify</span><b aria-hidden="true">↗</b>
+            </a>
+            <i aria-hidden="true"><b /><b /><b /><b /><b /><b /></i>
           </div>
           <div className="about-scrap about-scrap--note">
             <span>A NOTE TO SELF</span>

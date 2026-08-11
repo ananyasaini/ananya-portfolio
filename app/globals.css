@@ -917,6 +917,10 @@ button { color: inherit; font: inherit; }
 .about-scrap--song > span { color: #f7a3bd; font-size: 0.58rem; letter-spacing: 0.09em; }
 .about-scrap--song strong { display: block; margin: 1.3rem 0 0.3rem; font-family: var(--font-serif), Georgia, serif; font-size: clamp(1.5rem, 2.6vw, 2.7rem); font-weight: 400; }
 .about-scrap--song small { color: rgba(242,239,231,0.56); }
+.about-scrap__song-link { display: flex; align-items: center; justify-content: space-between; margin-top: 1rem; padding-top: 0.65rem; border-top: 1px solid rgba(242,239,231,0.2); color: #f7a3bd; font-size: 0.67rem; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; text-transform: uppercase; }
+.about-scrap__song-link b { display: grid; width: 1.55rem; height: 1.55rem; place-items: center; border: 1px solid currentColor; border-radius: 50%; font-size: 0.8rem; transition: color 200ms ease, background 200ms ease, transform 200ms ease; }
+.about-scrap__song-link:hover b, .about-scrap__song-link:focus-visible b { color: var(--ink); background: #f7a3bd; transform: rotate(12deg); }
+.about-scrap__song-link:focus-visible { outline: 2px solid #f7a3bd; outline-offset: 0.3rem; }
 .about-scrap--song i { height: 2.5rem; display: flex; align-items: end; gap: 0.25rem; margin-top: 0.8rem; }
 .about-scrap--song i b { width: 0.35rem; height: 35%; background: #f7a3bd; animation: audio-wave 1s ease-in-out infinite alternate; }
 .about-scrap--song i b:nth-child(2) { height: 78%; animation-delay: -0.5s; }
